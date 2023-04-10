@@ -1,1 +1,1 @@
-# ignite-feed-pro1
+# ignite-feed-projeto - 1 - Fundementos de React - Rocketseat
