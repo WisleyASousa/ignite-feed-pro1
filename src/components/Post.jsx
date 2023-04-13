@@ -3,14 +3,16 @@ import ptBR from 'date-fns/locale/pt-BR';
 import { Avatar } from './Avatar';
 import { Comment } from './Comment';
 import styles from './Post.module.css';
+import { useState } from 'react';
 
-const comments = [
-  1,
-  2,
-  3,
-];
 
 export function Post({ author, publishedAt, content }) {
+
+  const [comments, setComments] = useState([
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, itaque?'
+  ]);
+
+  const [newCommentText, setNewCommentText] = useState('');
 
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {locale: ptBR});
 
@@ -19,7 +21,17 @@ export function Post({ author, publishedAt, content }) {
     addSuffix: true,
   });
   function handleCreateNewComment() {
-    console.log('oi')
+    event.preventDefault();
+
+    setComments([newCommentText, ...comments]);
+    setNewCommentText('');
+
+  }
+  function handleNewCommentChange() {
+    setNewCommentText(event.target.value);
+  }
+  function deleteComment(comment) {
+    console.log(`Deleting: ${comment}`)
   }
 
   return (
@@ -43,9 +55,9 @@ export function Post({ author, publishedAt, content }) {
       <div  className={styles.content}>
         {content.map(line => {
           if(line.type == 'paragraph'){
-            return <p>{line.content}</p>
+            return <p key={line.content}>{line.content}</p>
           } else if (line.type == 'link') {
-            return <p><a href='#'>{line.content}</a></p>
+            return <p key={line.content}><a href='#'>{line.content}</a></p>
           }
         })}
         <p className={styles.tags}>
@@ -59,8 +71,12 @@ export function Post({ author, publishedAt, content }) {
         <strong>Deixe seu feedback</strong>
 
         <textarea
+          name='comment'
           placeholder='Deixe um comentário'
+          value={newCommentText}
+          onChange={handleNewCommentChange}
         />
+
         <footer>
           <button type='submit'>Publicar</button>
         </footer>
@@ -68,7 +84,13 @@ export function Post({ author, publishedAt, content }) {
 
       <div className={styles.commentList}>
         {comments.map(comment => {
-            return <Comment />
+            return(
+              <Comment 
+              key={comment} 
+              content={comment} 
+              onDeleteComment={deleteComment} 
+              />
+            )
         })}
       </div>
     </article>

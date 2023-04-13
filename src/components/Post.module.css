@@ -77,15 +77,16 @@
   color: var(--gray-100);
   line-height: 1.4;
 }
-.comentForm footer {
+
+/* .comentForm footer {
   visibility: hidden;
-  /* max-height: 0; */
+
 }
 
 .comentForm:focus-within footer{
   visibility: visible;
-  /* max-height: none; */
-}
+
+} */
 
 .comentForm button {
   padding: 1rem 1.5rem;
