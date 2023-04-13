@@ -24,7 +24,7 @@ export function Post({ author, publishedAt, content }) {
     event.preventDefault();
 
     setComments([newCommentText, ...comments]);
-    setNewCommentTe ft('');
+    setNewCommentText('');
 
   }
   function handleNewCommentChange() {
