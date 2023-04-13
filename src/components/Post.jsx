@@ -24,21 +24,26 @@ export function Post({ author, publishedAt, content }) {
     event.preventDefault();
 
     setComments([newCommentText, ...comments]);
-    setNewCommentText('');
+    setNewCommentTe ft('');
 
   }
   function handleNewCommentChange() {
+    event.target.setCustomValidity('');
     setNewCommentText(event.target.value);
   }
+  function handleNewCommentInvalid() {
+    event.target.setCustomValidity('Esse campo não pode ser vazio');
+  }
+
   function deleteComment(commentToDelete) {
-    //imutabilidade: as variaveis nao sofrem mutação(nao alteracoes o valor de uma variavel na memoria), na verdade nós criamos um novo valor(um novo espaço na memoria.)
-    
     const commentsWithoutDeleteOne = comments.filter(comment => {
       return comment !== commentToDelete
     })
     
     setComments(commentsWithoutDeleteOne);
   }
+
+  const isNewCommentEmpty = newCommentText.length == 0
 
   return (
     <article className={styles.post}>
@@ -81,10 +86,18 @@ export function Post({ author, publishedAt, content }) {
           placeholder='Deixe um comentário'
           value={newCommentText}
           onChange={handleNewCommentChange}
+          // uma propriedade que é chamada sempre que o HTML, identificar que o usuario tentou realizar um submit do formulario só que o texto do campo é invalido.
+          onInvalid={handleNewCommentInvalid}
+          required
         />
 
         <footer>
-          <button type='submit'>Publicar</button>
+          <button 
+            type='submit' 
+            disabled={isNewCommentEmpty}
+          >
+            Publicar
+          </button>
         </footer>
       </form>
 

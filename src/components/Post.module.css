@@ -97,11 +97,14 @@
   color: var(--white);
   transition: all .2s ease-out;
   cursor: pointer;
-
 }
-.comentForm button:hover {
+.comentForm button:not(:disabled):hover {
   background: var(--green-300);
-  
+}
+
+.comentForm button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
 }
 
 .commentList {
