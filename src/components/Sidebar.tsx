@@ -10,7 +10,7 @@ export function Sidebar() {
           src='https://images.unsplash.com/photo-1680950376343-4a14ef84157d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=50' />
 
         <div className={styles.profile}>
-          <Avatar src='https://github.com/wisleyasousa.png' />
+          <Avatar src='https://github.com/wisleyasousa.png' alt='Iamgem de Perfil do Usuário' />
           <strong>Wisley A. Sousa</strong>
           <span>Web Developer</span>
         </div>
